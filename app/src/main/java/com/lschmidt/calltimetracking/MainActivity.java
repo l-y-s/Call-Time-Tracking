@@ -34,12 +34,11 @@ public class MainActivity extends AppCompatActivity {
         PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(),intent, 0);
 
         Notification noti = new Notification.Builder(this)
-                .setContentTitle("New mail from " + "test@gmail.com")
-                .setContentText("Subject").setSmallIcon(R.drawable.icon)
+                .setContentTitle("New call tracking data available")
+                .setContentText("Press to view graph")
+                .setSmallIcon(R.drawable.icon)
                 .setContentIntent(pIntent)
-                .addAction(R.drawable.icon, "Call", pIntent)
-                .addAction(R.drawable.icon, "More", pIntent)
-                .addAction(R.drawable.icon, "And more", pIntent).build();
+                .build();
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         noti.flags |= Notification.FLAG_AUTO_CANCEL;
@@ -53,6 +52,13 @@ public class MainActivity extends AppCompatActivity {
                 createNotification();
             }
         }
+    }
+
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
 
